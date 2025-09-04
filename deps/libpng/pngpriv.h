@@ -436,18 +436,8 @@
     */
 #  include <float.h>
 
-#  if (defined(__MWERKS__) && defined(macintosh)) || defined(applec) || \
-    defined(THINK_C) || defined(__SC__) || defined(TARGET_OS_MAC)
-     /* We need to check that <math.h> hasn't already been included earlier
-      * as it seems it doesn't agree with <fp.h>, yet we should really use
-      * <fp.h> if possible.
-      */
-#    if !defined(__MATH_H__) && !defined(__MATH_H) && !defined(__cmath__)
-#      include <fp.h>
-#    endif
-#  else
-#    include <math.h>
-#  endif
+#  include <math.h>
+
 #  if defined(_AMIGA) && defined(__SASC) && defined(_M68881)
      /* Amiga SAS/C: We must include builtin FPU functions when compiling using
       * MATH=68881
@@ -910,7 +900,7 @@ PNG_INTERNAL_FUNCTION(png_voidp,png_malloc_base,(png_const_structrp png_ptr,
 #if defined(PNG_TEXT_SUPPORTED) || defined(PNG_sPLT_SUPPORTED) ||\
    defined(PNG_STORE_UNKNOWN_CHUNKS_SUPPORTED)
 /* Internal array allocator, outputs no error or warning messages on failure,
- * just returns NULL.  
+ * just returns NULL.
  */
 PNG_INTERNAL_FUNCTION(png_voidp,png_malloc_array,(png_const_structrp png_ptr,
    int nelements, size_t element_size),PNG_ALLOCATED);
